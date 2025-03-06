@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
 import { Input } from "@/components/ui/input"
@@ -19,6 +18,8 @@ export default function CareersPage() {
     message: "",
     resume: null as File | null,
   })
+  
+  const [attachmentInfo, setAttachmentInfo] = useState("(0MB)")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,10 +37,20 @@ export default function CareersPage() {
       if (response.ok) {
         alert("Application submitted successfully!")
         setFormData({ name: "", email: "", phone: "", message: "", resume: null })
+        setAttachmentInfo("(0MB)")
       }
     } catch (error) {
       console.error("Error:", error)
       alert("An error occurred. Please try again.")
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setFormData({ ...formData, resume: file })
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1)
+      setAttachmentInfo(`Attachment(${fileSizeMB}MB)`)
     }
   }
 
@@ -71,7 +82,7 @@ export default function CareersPage() {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="border-0 border-b border-gray-200 rounded-none px-0 py-2 focus:ring-0 placeholder:text-gray-400"
+                  className="border border-gray-200 rounded px-3 py-2 focus:ring-1 focus:ring-gray-300 placeholder:text-gray-400 w-full"
                   required
                 />
               </div>
@@ -83,24 +94,24 @@ export default function CareersPage() {
                   placeholder="you@company.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="border-0 border-b border-gray-200 rounded-none px-0 py-2 focus:ring-0 placeholder:text-gray-400"
+                  className="border border-gray-200 rounded px-3 py-2 focus:ring-1 focus:ring-gray-300 placeholder:text-gray-400 w-full"
                   required
                 />
               </div>
 
               <div className="space-y-1">
                 <label className="text-sm">Phone number</label>
-                <div className="flex border-b border-gray-200">
-                  <select className="border-0 bg-transparent text-sm py-2 pr-2 focus:ring-0">
-                    <option>US</option>
+                <div className="flex">
+                  <select className="border border-gray-200 rounded-l px-2 py-2 focus:ring-1 focus:ring-gray-300 text-sm bg-white">
+                    
                     <option>NG</option>
                   </select>
                   <Input
                     type="tel"
-                    placeholder="+1(555) 000-0000"
+                    placeholder="+234 000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="border-0 rounded-none px-0 py-2 focus:ring-0 placeholder:text-gray-400"
+                    className="border border-gray-200 border-l-0 rounded-l-none rounded-r px-3 py-2 focus:ring-1 focus:ring-gray-300 placeholder:text-gray-400 w-full"
                     required
                   />
                 </div>
@@ -113,30 +124,30 @@ export default function CareersPage() {
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="border-0 border-b border-gray-200 rounded-none px-0 py-2 focus:ring-0 resize-none placeholder:text-gray-400"
+                  className="border border-gray-200 rounded px-3 py-2 focus:ring-1 focus:ring-gray-300 resize-none placeholder:text-gray-400 w-full"
                   required
                 />
               </div>
 
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <Paperclip className="w-4 h-4" />
-                <label htmlFor="resume" className="cursor-pointer hover:text-gray-700">
+                <label htmlFor="resume" className="flex cursor-pointer hover:text-gray-700">
                   Attach Resume
+                  <input
+                    id="resume"
+                    type="file"
+                    className="hidden"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                  />
                 </label>
-                <input
-                  id="resume"
-                  type="file"
-                  className="hidden"
-                  accept=".pdf,.doc,.docx"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) setFormData({ ...formData, resume: file })
-                  }}
-                />
-                <span className="text-xs text-gray-400">{formData.resume ? formData.resume.name : "(0MB)"}</span>
+                <span className="text-xs text-gray-400 ml-auto">{attachmentInfo}</span>
               </div>
 
-              <Button type="submit" className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-6 rounded-md">
+              <Button 
+                type="submit" 
+                className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded border border-[#2E466D]"
+              >
                 Get started
               </Button>
             </form>
@@ -145,10 +156,22 @@ export default function CareersPage() {
           {/* Images Section */}
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-[450px] rounded-3xl overflow-hidden">
-              <Image src={img1 || "/placeholder.svg"} alt="Transportation" fill className="object-cover" />
+              <Image 
+                src={img1 || "/placeholder.svg"} 
+                alt="Transportation" 
+                fill 
+                className="object-cover" 
+                priority
+              />
             </div>
             <div className="relative h-[450px] rounded-3xl overflow-hidden">
-              <Image src={img2 || "/placeholder.svg"} alt="Construction" fill className="object-cover" />
+              <Image 
+                src={img2 || "/placeholder.svg"} 
+                alt="Construction" 
+                fill 
+                className="object-cover" 
+                priority
+              />
             </div>
           </div>
         </div>
@@ -156,4 +179,3 @@ export default function CareersPage() {
     </div>
   )
 }
-

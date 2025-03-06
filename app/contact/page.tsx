@@ -58,8 +58,11 @@ export default function ContactPage() {
         <div className="max-w-md mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-semibold">Contact Us</h1>
-            <Link href="/" className="text-[#B89D5B] hover:text-[#B89D5B]/80 flex items-center gap-2 text-sm">
-              <ArrowLeft className="w-4 h-4" />
+            <Link 
+              href="/" 
+              className="flex items-center gap-2 text-[#B89D5B] bg-[#F5F2EA] hover:bg-[#F0EBE0] px-6 py-3 rounded-lg text-lg font-medium"
+            >
+              <ArrowLeft className="w-5 h-5" />
               Back
             </Link>
           </div>
@@ -88,14 +91,14 @@ export default function ContactPage() {
             />
 
             <div className="flex">
-              <select className="rounded-l-md border border-r-0 border-gray-200 bg-white px-3 py-3 text-sm w-20">
-                <option>US</option>
+              <select className="rounded-l-md border border-r-2 border-gray-200 bg-white px-3 py-3 text-sm w-20">
+                <option>NG</option>
                 <option>NG</option>
               </select>
               <Input
                 type="tel"
-                placeholder="+1(555) 000-0000"
-                className="rounded-l-none flex-1 px-4 py-3"
+                placeholder="+234 000-0000"
+                className="rounded-l-none rounded-r-md flex-1 px-4 py-3 border-r-2 border-gray-200"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
@@ -111,7 +114,10 @@ export default function ContactPage() {
               required
             />
 
-            <Button type="submit" className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded-md">
+            <Button 
+              type="submit" 
+              className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded-md border-r-3 border-[#2E466D]"
+            >
               Get started
             </Button>
           </form>
@@ -120,4 +126,3 @@ export default function ContactPage() {
     </div>
   )
 }
-
