@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import img1 from "@/components/images/contactus.svg"
+import type React from "react";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import img1 from "@/components/images/contactus.svg";
+import imgmobile from "@/components/images/contactus.svg";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,10 +17,10 @@ export default function ContactPage() {
     email: "",
     phone: "",
     message: "",
-  })
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const response = await fetch("/api/contact", {
@@ -32,97 +32,156 @@ export default function ContactPage() {
           ...formData,
           to: "support@gctgroup.ng",
         }),
-      })
+      });
 
       if (response.ok) {
-        alert("Message sent successfully!")
-        setFormData({ name: "", email: "", phone: "", message: "" })
+        alert("Message sent successfully!");
+        setFormData({ name: "", email: "", phone: "", message: "" });
       } else {
-        alert("Failed to send message. Please try again.")
+        alert("Failed to send message. Please try again.");
       }
     } catch (error) {
-      console.error("Error:", error)
-      alert("An error occurred. Please try again.")
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex">
-      {/* Left side - Image */}
+      {/* Background image for mobile */}
+      <div className="absolute inset-0 md:hidden">
+        <Image
+          src={imgmobile || "/placeholder.svg"}
+          alt="Mobile Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Left side - Image (desktop only) */}
       <div className="hidden md:block w-1/2 relative">
-        <Image src={img1 || "/placeholder.svg"} alt="Modern Office Building" fill className="object-cover" priority />
+        <Image
+          src={img1 || "/placeholder.svg"}
+          alt="Modern Office Building"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Right side - Form */}
-      <div className="w-full md:w-1/2 p-8 md:p-12 relative">
-        <div className="max-w-md mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-semibold">Contact Us</h1>
-            <Link 
-              href="/" 
-              className="flex items-center gap-2 text-[#B89D5B] bg-[#F5F2EA] hover:bg-[#F0EBE0] px-6 py-3 rounded-lg text-lg font-medium"
+      <div className="w-full md:w-1/2 p-6 md:p-12 relative">
+        {/* Mobile layout wrapper to ensure content fits on screen */}
+        <div className="max-w-md mx-auto md:h-auto h-full flex flex-col">
+          {/* Header with title and back button */}
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl md:text-3xl font-semibold text-black">
+              Contact Us
+            </h1>
+            <Link
+              href="/"
+              className="flex items-center gap-1 text-[#9E865E] bg-amber-50 hover:bg-[#9E865E] hover:bg-opacity-15 px-3 py-1 rounded-full text-sm"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
               Back
             </Link>
           </div>
 
-          <p className="text-gray-600 mb-8">
-            You can reach us anytime via <span className="text-[#2E466D] font-medium">info@gctgroup.ng</span>
+          {/* Contact info */}
+          <p className="text-gray-600 mb-4 text-sm md:text-base">
+            You can reach us anytime via{" "}
+            <span className="text-[#2E466D] font-medium">info@gctgroup.ng</span>
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <Input
-              type="text"
-              placeholder="Your name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-md border border-gray-200"
-              required
-            />
-
-            <Input
-              type="email"
-              placeholder="you@company.com"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-md border border-gray-200"
-              required
-            />
-
-            <div className="flex">
-              <select className="rounded-l-md border border-r-2 border-gray-200 bg-white px-3 py-3 text-sm w-20">
-                <option>NG</option>
-                <option>NG</option>
-              </select>
+          {/* Contact form - using flex-1 to distribute space */}
+          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4 flex-1 flex flex-col">
+            <div className="space-y-1 md:space-y-2">
+              <label className="text-sm text-gray-700">Name</label>
               <Input
-                type="tel"
-                placeholder="+234 000-0000"
-                className="rounded-l-none rounded-r-md flex-1 px-4 py-3 border-r-2 border-gray-200"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                type="text"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
                 required
               />
+              <p className="text-xs text-gray-500">
+                This is a hint text to help user.
+              </p>
             </div>
 
-            <Textarea
-              placeholder="What would you like to say"
-              rows={4}
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-md border border-gray-200"
-              required
-            />
+            <div className="space-y-1 md:space-y-2">
+              <label className="text-sm text-gray-700">Email</label>
+              <Input
+                type="email"
+                placeholder="you@company.com"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
+                required
+              />
+              <p className="text-xs text-gray-500">
+                This is a hint text to help user.
+              </p>
+            </div>
 
-            <Button 
-              type="submit" 
-              className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded-md border-r-3 border-[#2E466D]"
-            >
-              Get started
-            </Button>
+            <div className="space-y-1 md:space-y-2">
+              <label className="text-sm text-gray-700">Phone number</label>
+              <div className="flex">
+                <select className="rounded-l-xl border border-r-0 border-gray-200 bg-white text-black">
+                  <option>US</option>
+                  <option>NG</option>
+                </select>
+                <Input
+                  type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  className="rounded-l-none rounded-r-xl flex-1 px-4 py-2 md:py-3 border border-gray-200 bg-white text-black placeholder:text-gray-500"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <p className="text-xs text-gray-500">
+                This is a hint text to help user.
+              </p>
+            </div>
+
+            <div className="space-y-1 md:space-y-2">
+              <label className="text-sm text-gray-700">Message</label>
+              <Textarea
+                placeholder="What would you like to say"
+                rows={3}
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
+                required
+              />
+              <p className="text-xs text-gray-500">
+                This is a hint text to help user.
+              </p>
+            </div>
+
+            {/* The button is now part of the form but positioned at the bottom */}
+            <div className="mt-auto pt-4">
+              <Button
+                type="submit" 
+                className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-2 md:py-3 rounded-xl"
+              >
+                Get started
+              </Button>
+            </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
