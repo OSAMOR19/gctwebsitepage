@@ -148,9 +148,9 @@ export default function ContactPage() {
                   required
                 />
               </div>
-              <p className="text-xs text-gray-500">
+              {/* <p className="text-xs text-gray-500">
                 This is a hint text to help user.
-              </p>
+              </p> */}
             </div>
 
             <div className="space-y-1 md:space-y-2">
