@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
-export default function Navbar() {
+export default function Navbar({ className = "" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -22,10 +22,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="w-full z-50 bg-transparent absolute top-0 left-0">
-
-
-
+    <nav className={`w-full z-50 absolute top-0 left-0 transition-all ${className}`}>
       <div className="container-custom flex justify-between items-center py-4">
         <div className="flex items-center">
           <Link href="/" className="flex items-center">

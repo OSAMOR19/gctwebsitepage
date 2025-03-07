@@ -58,7 +58,7 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
-      <Nav />
+      <Nav className="bg-[#2E466D]"  />
       
       <div className="max-w-6xl pt-7 pt-md-8 mx-auto px-4">
         <div className="text-center mb-8 md:mb-16 pt-6">
@@ -73,28 +73,29 @@ export default function CareersPage() {
         </div>
 
         {/* Mobile view images */}
-        <div className="mb-6 space-y-2 md:hidden">
-          <div className="h-24 rounded-lg overflow-hidden">
-            <Image 
-              src={img1 || "/placeholder.svg"} 
-              alt="Transportation" 
-              width={400}
-              height={100}
-              className="object-cover w-full h-full" 
-              priority
-            />
-          </div>
-          <div className="h-24 rounded-lg overflow-hidden">
-            <Image 
-              src={img2 || "/placeholder.svg"} 
-              alt="Construction" 
-              width={400}
-              height={100}
-              className="object-cover w-full h-full" 
-              priority
-            />
-          </div>
-        </div>
+        <div className="mb-6 space-y-2 md:hidden flex flex-col">
+  <div className="h-24 rounded-lg overflow-hidden">
+    <Image 
+      src={img1 || "/placeholder.svg"} 
+      alt="Transportation" 
+      width={400}
+      height={100}
+      className="object-cover w-full h-full rounded-lg" 
+      priority
+    />
+  </div>
+  <div className="h-24 rounded-lg overflow-hidden">
+    <Image 
+      src={img2 || "/placeholder.svg"} 
+      alt="Construction" 
+      width={400}
+      height={100}
+      className="object-cover w-full h-full rounded-lg" 
+      priority
+    />
+  </div>
+</div>
+
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Form Section */}
@@ -173,7 +174,7 @@ export default function CareersPage() {
 
               <Button 
                 type="submit" 
-                className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded border border-[#2E466D]"
+                className="w-full pb-3 bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded border border-[#2E466D]"
               >
                 Get started
               </Button>
