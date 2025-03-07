@@ -45,7 +45,7 @@ export default function AboutSection() {
             <h2 className="text-3xl font-bold mb-6">
               GCT Group: Pioneering Excellence Across Multiple Sectors
             </h2>
-            <p className="text-gray-700 mb-4 leading-relaxed">
+            <p className="text-gray-700  mb-4 leading-10">
               GCT Group is a Nigerian conglomerate with a strong presence in
               various sectors, including telecommunications, energy, power,
               construction, education, and travel. With over two decades of
@@ -74,7 +74,7 @@ export default function AboutSection() {
             <h2 className="text-2xl font-bold mb-4">
               Empowering Africa: The GCT Group Story
             </h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-10">
               GCT Group has a successful track record with decades of successful
               projects, strategic partnerships, and cutting-edge technologies.
               They are committed to bridging gaps in Africa by providing
