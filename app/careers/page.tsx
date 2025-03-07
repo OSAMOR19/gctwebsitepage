@@ -132,11 +132,11 @@ export default function CareersPage() {
                 <label className="text-sm">Phone number</label>
                 <div className="flex">
                   <select className="border border-gray-200 rounded-l px-2 py-2 focus:ring-1 focus:ring-gray-300 text-sm bg-white">
-                    <option>US</option>
+                    <option>NG</option>
                   </select>
                   <Input
                     type="tel"
-                    placeholder="+1(555)000-0000"
+                    placeholder="+234-000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="border border-gray-200 border-l-0 rounded-l-none rounded-r px-3 py-2 focus:ring-1 focus:ring-gray-300 placeholder:text-gray-400 w-full"
@@ -183,7 +183,7 @@ export default function CareersPage() {
 
           {/* Desktop Images Section */}
           <div className="hidden lg:grid grid-cols-2 gap-4">
-            <div className="relative h-[450px] rounded-3xl overflow-hidden">
+            <div className="relative border-3 h-[450px] rounded-3xl overflow-hidden">
               <Image 
                 src={img1 || "/placeholder.svg"} 
                 alt="Transportation" 

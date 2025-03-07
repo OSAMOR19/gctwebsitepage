@@ -21,6 +21,19 @@ export default function Navbar({ className = "" }) {
     { name: "Contact Us", href: "/contact" },
   ]
 
+  const handleScroll = (href: string) => {
+    if (href.startsWith("#")) {
+      const section = document.querySelector(href)
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+      setIsMenuOpen(false) // Close mobile menu on click
+    }
+  }
+
   return (
     <nav className={`w-full z-50 absolute top-0 left-0 transition-all ${className}`}>
       <div className="container-custom flex justify-between items-center py-4">
@@ -35,16 +48,17 @@ export default function Navbar({ className = "" }) {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.name}
               href={item.href}
-              className="relative text-white transition-all duration-300 ease-in-out pb-1
+              onClick={() => handleScroll(item.href)}
+              className="relative text-white transition-all duration-300 ease-in-out pb-1 
                          hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] 
                          after:bg-secondary after:absolute after:left-0 after:bottom-0 
                          after:transition-all after:duration-300"
             >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -60,7 +74,7 @@ export default function Navbar({ className = "" }) {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu - Overlay */}
+      {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 bg-black/50 md:hidden transition-opacity duration-300 ease-in-out z-[51] ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -69,7 +83,7 @@ export default function Navbar({ className = "" }) {
         aria-hidden="true"
       />
 
-      {/* Mobile Navigation Menu */}
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 h-full w-[280px] bg-[#F5F5F5] transition-transform duration-300 ease-in-out z-[55] ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -77,14 +91,14 @@ export default function Navbar({ className = "" }) {
       >
         <div className="h-full flex flex-col justify-center">
           {navItems.map((item) => (
-            <Link
+            <a
               key={item.name}
               href={item.href}
+              onClick={() => handleScroll(item.href)}
               className="py-4 px-6 text-gray-900 text-base"
-              onClick={() => setIsMenuOpen(false)}
             >
               {item.name}
-            </Link>
+            </a>
           ))}
         </div>
       </div>

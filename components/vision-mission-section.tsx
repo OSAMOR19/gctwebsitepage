@@ -22,7 +22,7 @@ export default function VisionMissionSection() {
   ]
 
   return (
-    <section className="relative py-20 px-10 bg-[#E0E0E1] overflow-hidden">
+    <section id="mission" className="relative  py-20 px-10 bg-[#E0E0E1] overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           
