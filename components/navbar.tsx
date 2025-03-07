@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 export default function Navbar({ className = "" }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,27 +12,32 @@ export default function Navbar({ className = "" }) {
 
   const navItems = [
     { name: "About us", href: "#about-us" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Vision", href: "#vision" },
+    { name: "Achievements", href: "#achievment" },
+    { name: "Vision", href: "#mission" },
     { name: "Mission", href: "#mission" },
-    { name: "Goals", href: "#goals" },
+    { name: "Goals", href: "#goals-section" },
     { name: "Values", href: "#values" },
     { name: "Divisions", href: "#divisions" },
     { name: "Careers", href: "/careers" },
     { name: "Contact Us", href: "/contact" },
   ]
 
-  const handleScroll = (href: string) => {
-    if (href.startsWith("#")) {
-      const section = document.querySelector(href)
-      if (section) {
-        section.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      }
-      setIsMenuOpen(false) // Close mobile menu on click
-    }
+  // Smooth scroll function
+  const smoothScroll = (target: string) => {
+    const element = document.querySelector(target)
+    if (!element) return
+
+    const headerOffset = 80 // Adjust based on navbar height
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY
+    const offsetPosition = elementPosition - headerOffset
+
+    // Animate scroll
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth", // Native smooth scrolling
+    })
+
+    setIsMenuOpen(false) // Close menu after click
   }
 
   return (
@@ -47,19 +53,32 @@ export default function Navbar({ className = "" }) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={() => handleScroll(item.href)}
-              className="relative text-white transition-all duration-300 ease-in-out pb-1 
-                         hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] 
-                         after:bg-secondary after:absolute after:left-0 after:bottom-0 
-                         after:transition-all after:duration-300"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) =>
+            item.href.startsWith("#") ? (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  smoothScroll(item.href)
+                }}
+                className="relative text-white transition-all duration-300 ease-in-out pb-1 
+                           hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] 
+                           after:bg-secondary after:absolute after:left-0 after:bottom-0 
+                           after:transition-all after:duration-300"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="relative text-white transition-all duration-300 ease-in-out pb-1 hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] after:bg-secondary after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300"
+              >
+                {item.name}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Mobile Navigation Toggle */}
@@ -74,7 +93,7 @@ export default function Navbar({ className = "" }) {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Navigation Menu - Overlay */}
       <div
         className={`fixed inset-0 bg-black/50 md:hidden transition-opacity duration-300 ease-in-out z-[51] ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -83,25 +102,40 @@ export default function Navbar({ className = "" }) {
         aria-hidden="true"
       />
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-[#F5F5F5] transition-transform duration-300 ease-in-out z-[55] ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+      {/* Mobile Navigation Menu */}
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: isMenuOpen ? "0%" : "100%" }}
+        transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+        className="fixed top-0 right-0 h-full w-[280px] bg-[#F5F5F5] shadow-lg md:hidden z-[55]"
       >
         <div className="h-full flex flex-col justify-center">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={() => handleScroll(item.href)}
-              className="py-4 px-6 text-gray-900 text-base"
-            >
-              {item.name}
-            </a>
-          ))}
+          {navItems.map((item) =>
+            item.href.startsWith("#") ? (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  smoothScroll(item.href)
+                }}
+                className="py-4 px-6 text-gray-900 text-base"
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="py-4 px-6 text-gray-900 text-base"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            )
+          )}
         </div>
-      </div>
+      </motion.div>
     </nav>
   )
 }

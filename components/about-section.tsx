@@ -59,7 +59,7 @@ export default function AboutSection() {
         </div>
 
         {/* Achievements Section */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div id="achievment" className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Text Content - Fade-in effect */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
