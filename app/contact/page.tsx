@@ -134,12 +134,12 @@ export default function ContactPage() {
               <label className="text-sm text-gray-700">Phone number</label>
               <div className="flex">
                 <select className="rounded-l-xl border border-r-0 border-gray-200 bg-white text-black">
-                  <option>US</option>
+                  <option>NG</option>
                   <option>NG</option>
                 </select>
                 <Input
                   type="tel"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="+234 -000-0000"
                   className="rounded-l-none rounded-r-xl flex-1 px-4 py-2 md:py-3 border border-gray-200 bg-white text-black placeholder:text-gray-500"
                   value={formData.phone}
                   onChange={(e) =>

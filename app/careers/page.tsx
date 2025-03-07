@@ -56,26 +56,53 @@ export default function CareersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pt-16">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-medium mb-6">
+    <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <Nav />
+      
+      <div className="max-w-6xl pt-7 pt-md-8 mx-auto px-4">
+        <div className="text-center mb-8 md:mb-16 pt-6">
+          <h1 className="text-3xl pt-8 md:text-4xl font-medium mb-4 md:mb-6">
             Become part of the <span className="text-[#B89D5B]">GCT</span> family
           </h1>
-          <p className="text-gray-600 max-w-3xl mx-auto text-sm leading-relaxed">
+          <p className="text-gray-600 max-w-3xl mx-auto text-sm leading-relaxed hidden md:block">
             Our goal is to foster a win-win relationship that is guided by good faith and motivated by shared
             objectives. We believe that education and training are essential to everyone's success and therefore, we
             strategically select the best talent within GCT to raise our standards of Quality, Safety, and Excellence.
           </p>
         </div>
 
+        {/* Mobile view images */}
+        <div className="mb-6 space-y-2 md:hidden">
+          <div className="h-24 rounded-lg overflow-hidden">
+            <Image 
+              src={img1 || "/placeholder.svg"} 
+              alt="Transportation" 
+              width={400}
+              height={100}
+              className="object-cover w-full h-full" 
+              priority
+            />
+          </div>
+          <div className="h-24 rounded-lg overflow-hidden">
+            <Image 
+              src={img2 || "/placeholder.svg"} 
+              alt="Construction" 
+              width={400}
+              height={100}
+              className="object-cover w-full h-full" 
+              priority
+            />
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Form Section */}
           <div>
-            <h2 className="text-2xl font-medium mb-2">Join Our Team</h2>
-            <p className="text-sm text-gray-500 mb-6">Apply Now</p>
+            <h2 className="text-xl md:text-2xl font-medium mb-1 md:mb-2">Join Our Team</h2>
+            <p className="text-sm text-gray-500 mb-4 md:mb-6">Apply Now</p>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="space-y-1">
                 <label className="text-sm">Name</label>
                 <Input
@@ -104,12 +131,11 @@ export default function CareersPage() {
                 <label className="text-sm">Phone number</label>
                 <div className="flex">
                   <select className="border border-gray-200 rounded-l px-2 py-2 focus:ring-1 focus:ring-gray-300 text-sm bg-white">
-                    
-                    <option>NG</option>
+                    <option>US</option>
                   </select>
                   <Input
                     type="tel"
-                    placeholder="+234 000-0000"
+                    placeholder="+1(555)000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="border border-gray-200 border-l-0 rounded-l-none rounded-r px-3 py-2 focus:ring-1 focus:ring-gray-300 placeholder:text-gray-400 w-full"
@@ -154,8 +180,8 @@ export default function CareersPage() {
             </form>
           </div>
 
-          {/* Images Section */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Desktop Images Section */}
+          <div className="hidden lg:grid grid-cols-2 gap-4">
             <div className="relative h-[450px] rounded-3xl overflow-hidden">
               <Image 
                 src={img1 || "/placeholder.svg"} 
