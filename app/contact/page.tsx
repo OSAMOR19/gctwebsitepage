@@ -108,9 +108,7 @@ export default function ContactPage() {
                 className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
                 required
               />
-              <p className="text-xs text-gray-500">
-                This is a hint text to help user.
-              </p>
+             
             </div>
 
             <div className="space-y-1 md:space-y-2">
@@ -125,9 +123,7 @@ export default function ContactPage() {
                 className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
                 required
               />
-              <p className="text-xs text-gray-500">
-                This is a hint text to help user.
-              </p>
+              
             </div>
 
             <div className="space-y-1 md:space-y-2">
@@ -148,9 +144,7 @@ export default function ContactPage() {
                   required
                 />
               </div>
-              {/* <p className="text-xs text-gray-500">
-                This is a hint text to help user.
-              </p> */}
+             
             </div>
 
             <div className="space-y-1 md:space-y-2">
@@ -165,9 +159,7 @@ export default function ContactPage() {
                 className="w-full px-4 py-2 md:py-3 rounded-xl border border-gray-200 bg-white text-black placeholder:text-gray-500"
                 required
               />
-              <p className="text-xs text-gray-500">
-                This is a hint text to help user.
-              </p>
+
             </div>
 
             {/* The button is now part of the form but positioned at the bottom */}
