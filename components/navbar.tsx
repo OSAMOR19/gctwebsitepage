@@ -12,17 +12,17 @@ export default function Navbar({ className = "" }) {
 
   const navItems = [
     { name: "About us", href: "#about-us" },
-    { name: "Achievements", href: "#achievment" },
-    { name: "Vision", href: "#mission" },
+    { name: "Achievements", href: "#achievements" },
+    { name: "Vision", href: "#vision" },
     { name: "Mission", href: "#mission" },
-    { name: "Goals", href: "#goals-section" },
+    { name: "Goals", href: "#goals" },
     { name: "Values", href: "#values" },
     { name: "Divisions", href: "#divisions" },
     { name: "Careers", href: "/careers" },
     { name: "Contact Us", href: "/contact" },
   ]
 
-  // Smooth scroll function
+  // Smooth scrolling function
   const smoothScroll = (target: string) => {
     const element = document.querySelector(target)
     if (!element) return
@@ -31,10 +31,9 @@ export default function Navbar({ className = "" }) {
     const elementPosition = element.getBoundingClientRect().top + window.scrollY
     const offsetPosition = elementPosition - headerOffset
 
-    // Animate scroll
     window.scrollTo({
       top: offsetPosition,
-      behavior: "smooth", // Native smooth scrolling
+      behavior: "smooth",
     })
 
     setIsMenuOpen(false) // Close menu after click
@@ -51,8 +50,8 @@ export default function Navbar({ className = "" }) {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8">
+        {/* Desktop Navigation (only visible on large screens) */}
+        <div className="hidden lg:flex space-x-8">
           {navItems.map((item) =>
             item.href.startsWith("#") ? (
               <a
@@ -73,7 +72,10 @@ export default function Navbar({ className = "" }) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="relative text-white transition-all duration-300 ease-in-out pb-1 hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] after:bg-secondary after:absolute after:left-0 after:bottom-0 after:transition-all after:duration-300"
+                className="relative text-white transition-all duration-300 ease-in-out pb-1 
+                           hover:scale-105 hover:after:w-full after:w-0 after:h-[2px] 
+                           after:bg-secondary after:absolute after:left-0 after:bottom-0 
+                           after:transition-all after:duration-300"
               >
                 {item.name}
               </Link>
@@ -81,8 +83,8 @@ export default function Navbar({ className = "" }) {
           )}
         </div>
 
-        {/* Mobile Navigation Toggle */}
-        <div className="md:hidden">
+        {/* Mobile Navigation Toggle (visible on tablets & smaller screens) */}
+        <div className="lg:hidden">
           <button
             onClick={toggleMenu}
             className="text-[#D4AF37] focus:outline-none relative z-[60]"
@@ -95,7 +97,7 @@ export default function Navbar({ className = "" }) {
 
       {/* Mobile Navigation Menu - Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 md:hidden transition-opacity duration-300 ease-in-out z-[51] ${
+        className={`fixed inset-0 bg-black/50 lg:hidden transition-opacity duration-300 ease-in-out z-[51] ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={toggleMenu}
@@ -107,7 +109,7 @@ export default function Navbar({ className = "" }) {
         initial={{ x: "100%" }}
         animate={{ x: isMenuOpen ? "0%" : "100%" }}
         transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-        className="fixed top-0 right-0 h-full w-[280px] bg-[#F5F5F5] shadow-lg md:hidden z-[55]"
+        className="fixed top-0 right-0 h-full w-[280px] bg-[#F5F5F5] shadow-lg lg:hidden z-[55]"
       >
         <div className="h-full flex flex-col justify-center">
           {navItems.map((item) =>
