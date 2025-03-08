@@ -178,7 +178,7 @@ export default function CareersPage() {
                 type="submit" 
                 className="w-full pb-3 bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded border border-[#2E466D]"
               >
-                Get started
+                Apply Now
               </Button>
             </form>
           </div>

@@ -168,7 +168,7 @@ export default function ContactPage() {
                 type="submit" 
                 className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-2 md:py-3 rounded-xl"
               >
-                Get started
+                Submit
               </Button>
             </div>
           </form>

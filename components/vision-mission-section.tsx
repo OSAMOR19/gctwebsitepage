@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import ChevronDoubleLeftIcon from "@/components/images/Double-Left-Arrow.png"
 import ChevronDoubleRightIcon from "@/components/images/Double-Right-Arrow.png"
 import Big from "@/components/images/missionbig.svg"
@@ -11,6 +14,32 @@ import Img7 from "@/components/images/mission6.svg"
 import Img8 from "@/components/images/mission7.svg"
 
 export default function VisionMissionSection() {
+  // State to track window size
+  const [windowWidth, setWindowWidth] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
+
+  // Update window width on client side
+  useEffect(() => {
+    setIsMounted(true)
+    // Set initial width
+    setWindowWidth(window.innerWidth)
+    
+    // Update width on resize
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Calculate radius based on screen size
+  const getRadius = () => {
+    if (windowWidth >= 1024) return 260 // Large desktop
+    if (windowWidth >= 640) return 220 // Tablet
+    return 190 // Mobile
+  }
+
   // Define the orbital images with their positions at different angles
   const orbitalImages = [
     { src: Img2, angle: 45 },
@@ -21,6 +50,9 @@ export default function VisionMissionSection() {
     { src: Img7, angle: 270 },
     { src: Img8, angle: 315 },
   ]
+
+  // Default radius for SSR
+  const defaultRadius = 190
 
   return (
     <section id="mission" className="relative py-20 px-6 bg-[#E0E0E1] overflow-hidden">
@@ -42,9 +74,9 @@ export default function VisionMissionSection() {
 
           {/* Center Image with Orbital Images - Modified for the circular layout */}
           <div className="relative flex justify-center w-full lg:w-1/3">
-            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto">
+            <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] lg:w-[420px] lg:h-[420px] mx-auto">
               {/* Main Central Image */}
-              <div className="relative w-full h-full overflow-hidden rounded-full shadow-xl">
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[320px] lg:h-[320px] overflow-hidden rounded-full shadow-xl">
                 <Image
                   src={Big || "/placeholder.svg"}
                   alt="Mission Central"
@@ -54,12 +86,9 @@ export default function VisionMissionSection() {
                 />
               </div>
 
-              {/* Orbital Images arranged outside the central image */}
+              {/* Orbital Images arranged further outside the central image */}
               {orbitalImages.map((img, index) => {
-                // Calculate positions around the circle
-                // Increased radius to position images outside the main circle
-                const radius = 170 // For mobile
-                const lgRadius = 200 // For desktop
+                const radius = isMounted ? getRadius() : defaultRadius
                 const angleInRadians = (img.angle * Math.PI) / 180
                 
                 // Calculate positions based on the angle
@@ -67,9 +96,9 @@ export default function VisionMissionSection() {
                 const y = `calc(50% + ${radius * Math.sin(angleInRadians)}px)`
                 
                 // Size classes for the satellite images
-                const sizeClass = index % 3 === 0 ? "w-16 h-16 sm:w-20 sm:h-20" : 
-                                  index % 2 === 0 ? "w-14 h-14 sm:w-18 sm:h-18" : 
-                                  "w-12 h-12 sm:w-16 sm:h-16";
+                const sizeClass = index % 3 === 0 ? "w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24" : 
+                                  index % 2 === 0 ? "w-14 h-14 sm:w-18 sm:h-18 lg:w-20 lg:h-20" : 
+                                  "w-12 h-12 sm:w-16 sm:h-16 lg:w-18 lg:h-18";
 
                 return (
                   <div
