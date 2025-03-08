@@ -55,13 +55,13 @@ export default function VisionMissionSection() {
   const defaultRadius = 190
 
   return (
-    <section id="mission" className="relative py-20 px-6 bg-[#E0E0E1] overflow-hidden">
+    <section id="mission" className="relative py-20 px-12 bg-[#E0E0E1] overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           
           {/* Vision Section */}
-          <div className="lg:w-1/3 text-center lg:text-left animate-fadeInLeft">
-            <div className="flex justify-center lg:justify-start mb-2">
+          <div className="lg:w-1/3 text-center lg:text-center animate-fadeInLeft">
+            <div className="flex justify-center lg:justify-center mb-2">
               <Image src={ChevronDoubleLeftIcon} alt="Icon" className="w-8 h-8 lg:w-10 lg:h-10" />
             </div>
             <h2 className="text-secondary text-3xl font-medium mb-4">Our Vision</h2>
@@ -125,12 +125,12 @@ export default function VisionMissionSection() {
           </div>
 
           {/* Mission Section */}
-          <div className="lg:w-1/3 text-center lg:text-right animate-fadeInRight">
-            <div className="flex justify-center lg:justify-end mb-2">
+          <div className="lg:w-1/3 text-center lg:text-center animate-fadeInRight">
+            <div className="flex justify-center lg:justify-center mb-2">
               <Image src={ChevronDoubleRightIcon} alt="Icon" className="w-8 h-8 lg:w-10 lg:h-10" />
             </div>
             <h2 className="text-secondary text-3xl font-medium mb-4">Our Mission</h2>
-            <p className="text-gray-800 text-center lg:text-right max-w-md mx-auto lg:ml-auto leading-relaxed">
+            <p className="text-gray-800 text-center lg:text-center max-w-md mx-auto lg:ml-auto leading-relaxed">
               To empower industries and communities by delivering innovative, sustainable, and customer-focused 
               solutions in Telecommunications, Power and Energy, Construction and Real Estate, Education and Travel. 
               We are committed to driving excellence, fostering growth, and creating lasting value for our customers, 
