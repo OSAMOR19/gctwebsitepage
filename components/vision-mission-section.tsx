@@ -11,6 +11,7 @@ import Img7 from "@/components/images/mission6.svg"
 import Img8 from "@/components/images/mission7.svg"
 
 export default function VisionMissionSection() {
+  // Define the orbital images with their positions at different angles
   const orbitalImages = [
     { src: Img2, angle: 45 },
     { src: Img3, angle: 90 },
@@ -39,46 +40,55 @@ export default function VisionMissionSection() {
             </p>
           </div>
 
-          {/* Center Image with Animated Orbital Images */}
+          {/* Center Image with Orbital Images - Modified for the circular layout */}
           <div className="relative flex justify-center w-full lg:w-1/3">
-            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto animate-scaleUp">
+            <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto">
               {/* Main Central Image */}
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full overflow-hidden rounded-full shadow-xl">
                 <Image
                   src={Big || "/placeholder.svg"}
                   alt="Mission Central"
-                  className="rounded-full shadow-2xl transition-transform duration-500 hover:scale-110"
+                  className="object-cover transition-transform duration-500 hover:scale-110"
                   layout="fill"
-                  objectFit="contain"
+                  priority
                 />
               </div>
 
-              {/* Orbital Images with Floating Animation */}
+              {/* Orbital Images arranged outside the central image */}
               {orbitalImages.map((img, index) => {
-                const radius = 140 // Smaller radius for mobile
-                const lgRadius = 200 // Larger radius for desktops
+                // Calculate positions around the circle
+                // Increased radius to position images outside the main circle
+                const radius = 170 // For mobile
+                const lgRadius = 200 // For desktop
                 const angleInRadians = (img.angle * Math.PI) / 180
+                
+                // Calculate positions based on the angle
                 const x = `calc(50% + ${radius * Math.cos(angleInRadians)}px)`
                 const y = `calc(50% + ${radius * Math.sin(angleInRadians)}px)`
-                const lgX = `calc(50% + ${lgRadius * Math.cos(angleInRadians)}px)`
-                const lgY = `calc(50% + ${lgRadius * Math.sin(angleInRadians)}px)`
+                
+                // Size classes for the satellite images
+                const sizeClass = index % 3 === 0 ? "w-16 h-16 sm:w-20 sm:h-20" : 
+                                  index % 2 === 0 ? "w-14 h-14 sm:w-18 sm:h-18" : 
+                                  "w-12 h-12 sm:w-16 sm:h-16";
 
                 return (
                   <div
                     key={index}
-                    className="absolute w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 transform -translate-x-1/2 -translate-y-1/2 animate-float"
+                    className={`absolute ${sizeClass} transform -translate-x-1/2 -translate-y-1/2 animate-float z-10`}
                     style={{
                       left: x,
                       top: y,
                       animationDelay: `${index * 0.3}s`,
                     }}
                   >
-                    <Image
-                      src={img.src || "/placeholder.svg"}
-                      alt={`Orbital image ${index + 1}`}
-                      className="rounded-full w-full h-full object-cover shadow-lg transition-transform duration-300 hover:scale-125"
-                      layout="fill"
-                    />
+                    <div className="relative w-full h-full rounded-full overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                      <Image
+                        src={img.src || "/placeholder.svg"}
+                        alt={`Orbital image ${index + 1}`}
+                        className="object-cover transition-transform duration-300 hover:scale-125"
+                        layout="fill"
+                      />
+                    </div>
                   </div>
                 )
               })}
