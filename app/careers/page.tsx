@@ -58,12 +58,13 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
-      <Nav className="bg-[#2E466D]"  />
+      <Nav className="bg-[#2E466D] "  />
       
       <div className="max-w-6xl pt-7 pt-md-8 mx-auto px-4">
         <div className="text-center mb-8 md:mb-16 pt-6">
-          <h1 className="text-3xl pt-8 md:text-4xl font-medium mb-4 md:mb-6">
-            Become part of the <span className="text-[#B89D5B]">GCT</span> family
+          <div className="pt-8 text-white">.</div>
+          <h1 className="text-3xl pt-8  md:text-4xl font-medium mb-4 md:mb-6">
+            Become part of the <span className="text-secondary">GCT</span> family
           </h1>
           <p className="text-gray-600 max-w-3xl mx-auto text-sm leading-relaxed hidden md:block">
             Our goal is to foster a win-win relationship that is guided by good faith and motivated by shared
