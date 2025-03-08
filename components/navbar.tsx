@@ -13,7 +13,7 @@ export default function Navbar({ className = "" }) {
   const navItems = [
     { name: "About us", href: "/#about-us" },
     { name: "Achievements", href: "/#achievements" },
-    { name: "Vision", href: "/#vision" },
+    { name: "Vision", href: "/#mission" },
     { name: "Mission", href: "/#mission" },
     { name: "Goals", href: "/#goals" },
     { name: "Values", href: "/#values" },
