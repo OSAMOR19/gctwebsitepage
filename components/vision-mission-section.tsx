@@ -35,9 +35,9 @@ export default function VisionMissionSection() {
 
   // Calculate radius based on screen size
   const getRadius = () => {
-    if (windowWidth >= 1024) return 260 // Large desktop
+    if (windowWidth >= 1024) return 200 // Large desktop
     if (windowWidth >= 640) return 220 // Tablet
-    return 190 // Mobile
+    return 150 // Mobile
   }
 
   // Define the orbital images with their positions at different angles
@@ -65,7 +65,7 @@ export default function VisionMissionSection() {
               <Image src={ChevronDoubleLeftIcon} alt="Icon" className="w-8 h-8 lg:w-10 lg:h-10" />
             </div>
             <h2 className="text-secondary text-3xl font-medium mb-4">Our Vision</h2>
-            <p className="text-gray-800 text-center lg:text-left max-w-md mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-gray-800 text-center lg:text-center max-w-md mx-auto lg:mx-0 leading-relaxed">
               To be a transformative leader in the Nigerian business landscape, setting benchmarks of innovation, 
               reliability, and social impact across our core industries, while contributing to a prosperous and 
               sustainable future.
