@@ -63,7 +63,7 @@ export default function CareersPage() {
       
       <div className="max-w-6xl pt-7 pt-md-8 mx-auto px-4">
         <div className="text-center mb-8 md:mb-16 pt-6">
-          <div className="pt-8 text-white">.</div>
+          <div className="pt-2 text-white">.</div>
           <h1 className="text-3xl pt-8  md:text-4xl font-medium mb-4 md:mb-6">
             Become part of the <span className="text-secondary">GCT</span> family
           </h1>
