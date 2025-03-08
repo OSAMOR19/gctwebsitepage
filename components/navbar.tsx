@@ -12,7 +12,7 @@ export default function Navbar({ className = "" }) {
 
   const navItems = [
     { name: "About us", href: "/#about-us" },
-    { name: "Achievements", href: "/#achievement" },
+    { name: "Achievements", href: "/#achievments" },
     { name: "Vision", href: "/#mission" },
     { name: "Mission", href: "/#mission" },
     { name: "Goals", href: "/#goals-section" },
