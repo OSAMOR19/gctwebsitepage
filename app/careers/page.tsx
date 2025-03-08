@@ -10,6 +10,7 @@ import { Paperclip } from "lucide-react"
 import img1 from "@/components/images/partner1.svg"
 import img2 from "@/components/images/partner2.svg"
 import Nav from "@/components/navbar"
+import Link from "next/link"
 
 export default function CareersPage() {
   const [formData, setFormData] = useState({

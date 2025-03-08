@@ -11,13 +11,13 @@ export default function Navbar({ className = "" }) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   const navItems = [
-    { name: "About us", href: "#about-us" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Vision", href: "#vision" },
-    { name: "Mission", href: "#mission" },
-    { name: "Goals", href: "#goals" },
-    { name: "Values", href: "#values" },
-    { name: "Divisions", href: "#divisions" },
+    { name: "About us", href: "/#about-us" },
+    { name: "Achievements", href: "/#achievements" },
+    { name: "Vision", href: "/#vision" },
+    { name: "Mission", href: "/#mission" },
+    { name: "Goals", href: "/#goals" },
+    { name: "Values", href: "/#values" },
+    { name: "Divisions", href: "/#divisions" },
     { name: "Careers", href: "/careers" },
     { name: "Contact Us", href: "/contact" },
   ]
