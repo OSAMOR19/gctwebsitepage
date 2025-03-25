@@ -22,9 +22,17 @@ export default function CareersPage() {
   })
   
   const [attachmentInfo, setAttachmentInfo] = useState("(0MB)")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
+    
     try {
       const formDataToSend = new FormData()
       Object.entries(formData).forEach(([key, value]) => {
@@ -36,14 +44,29 @@ export default function CareersPage() {
         body: formDataToSend,
       })
 
+      const data = await response.json()
+
       if (response.ok) {
-        alert("Application submitted successfully!")
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you! Your application has been submitted successfully. We'll review it and get back to you soon.",
+        })
         setFormData({ name: "", email: "", phone: "", message: "", resume: null })
         setAttachmentInfo("(0MB)")
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: `Failed to submit application: ${data.error || "Please try again later."}`,
+        })
       }
     } catch (error) {
       console.error("Error:", error)
-      alert("An error occurred. Please try again.")
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred while submitting your application. Please try again.",
+      })
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -174,11 +197,25 @@ export default function CareersPage() {
                 <span className="text-xs text-gray-400 ml-auto">{attachmentInfo}</span>
               </div>
 
+              {/* Status message */}
+              {submitStatus.type && (
+                <div 
+                  className={`p-4 rounded-lg ${
+                    submitStatus.type === "success" 
+                      ? "bg-green-50 text-green-800 border border-green-200" 
+                      : "bg-red-50 text-red-800 border border-red-200"
+                  }`}
+                >
+                  {submitStatus.message}
+                </div>
+              )}
+
               <Button 
                 type="submit" 
+                disabled={isSubmitting}
                 className="w-full pb-3 bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-3 rounded border border-[#2E466D]"
               >
-                Apply Now
+                {isSubmitting ? "Submitting..." : "Apply Now"}
               </Button>
             </form>
           </div>

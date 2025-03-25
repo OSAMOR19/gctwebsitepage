@@ -19,30 +19,49 @@ export default function ContactPage() {
     message: "",
   });
 
+  // Update the handleSubmit function in your contact page
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+  
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          to: "support@gctgroup.ng",
-        }),
+        body: JSON.stringify(formData),
       });
-
+  
+      const data = await response.json();
+  
       if (response.ok) {
-        alert("Message sent successfully!");
+        setSubmitStatus({
+          type: "success",
+          message: "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+        });
         setFormData({ name: "", email: "", phone: "", message: "" });
       } else {
-        alert("Failed to send message. Please try again.");
+        setSubmitStatus({
+          type: "error",
+          message: `Failed to send message: ${data.error || "Please try again later."}`,
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred. Please try again.");
+      setSubmitStatus({
+        type: "error",
+        message: "An error occurred while sending your message. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -162,13 +181,27 @@ export default function ContactPage() {
 
             </div>
 
+            {/* Status message */}
+            {submitStatus.type && (
+              <div 
+                className={`p-4 rounded-lg ${
+                  submitStatus.type === "success" 
+                    ? "bg-green-50 text-green-800 border border-green-200" 
+                    : "bg-red-50 text-red-800 border border-red-200"
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
             {/* The button is now part of the form but positioned at the bottom */}
             <div className="mt-auto pt-4">
               <Button
                 type="submit" 
+                disabled={isSubmitting}
                 className="w-full bg-[#2E466D] hover:bg-[#2E466D]/90 text-white py-2 md:py-3 rounded-xl"
               >
-                Submit
+                {isSubmitting ? "Sending..." : "Submit"}
               </Button>
             </div>
           </form>
