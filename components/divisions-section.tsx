@@ -14,31 +14,31 @@ export default function DivisionsSection() {
       title: "Telecommunication",
       image: TelecommunicationsIcon,
       description:
-        "They specialize in voice and SMS services, managing over 565 global operators. They hold essential Nigerian MVNO licenses.",
+        "We specialize in voice and SMS services, managing over 565 global operators. We hold essential Nigerian MVNO licenses.",
     },
     {
       title: "Power & Energy",
       image: PowerIcon,
       description:
-        "They offer a diverse range of generators, turbines, and clean energy solutions, ensuring 24/7 availability and sustainable growth.",
+        "We offer a diverse range of generators, turbines, and clean energy solutions, ensuring 24/7 availability and sustainable growth.",
     },
     {
       title: "Construction & Real Estate",
       image: ConstructionIcon,
       description:
-        "They also engage in community initiatives, utilize foam-based construction technology, and integrate green building initiatives for a greener future.",
+        "We also engage in community initiatives, utilize foam-based construction technology, and integrate green building initiatives for a greener future.",
     },
     {
       title: "Travel & Tourism",
       image: TravelIcon,
       description:
-        "The platform caters to various travel needs, offering tailored solutions for businesses, consumers, and organizations.",
+        "Our platform caters to various travel needs, offering tailored solutions for businesses, consumers, and organizations.",
     },
     {
       title: "Education",
       image: EducationIcon,
       description:
-        "The platform uses AI and machine learning, enables customized learning programs, and integrates renewable energy-powered educational infrastructure.",
+        "Our platform uses AI and machine learning, enables customized learning programs, and integrates renewable energy-powered educational infrastructure.",
     },
   ];
 

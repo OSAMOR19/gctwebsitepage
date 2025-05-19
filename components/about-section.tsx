@@ -77,7 +77,7 @@ export default function AboutSection() {
             <p className="text-gray-700 leading-10">
               GCT Group has a successful track record with decades of successful
               projects, strategic partnerships, and cutting-edge technologies.
-              They are committed to bridging gaps in Africa by providing
+              We are committed to bridging gaps in Africa by providing
               comprehensive technology solutions that accelerate development and
               empower communities, creating opportunities for a brighter future.
             </p>
