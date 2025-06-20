@@ -28,7 +28,7 @@ export default function Footer() {
             <Phone className="w-5 h-5 mt-1 mr-3 text-[#9E865E]" />
             <div>
               <h3 className="font-semibold mb-2">Contact</h3>
-              <p className="text-sm text-gray-300 mb-2">08174 250 000</p>
+              <p className="text-sm text-gray-300 mb-2">07001345000</p>
               <p className="text-sm text-gray-300">info@gctgroup.ng</p>
             </div>
           </div>
