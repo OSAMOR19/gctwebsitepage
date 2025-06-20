@@ -12,7 +12,10 @@ export const metadata: Metadata = {
   title: "GCT Group - Building a Legacy of Excellence & Innovation Across Africa",
   description:
     "GCT Group is a Nigerian conglomerate with a strong presence in various sectors, including telecommunications, energy, power, construction, education, and travel.",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  icons: {
+    icon: '/components/images/GCTlogo.svg',
+  }
 }
 
 export default function RootLayout({
